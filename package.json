@@ -1,0 +1,53 @@
+{
+  "name": "pillpal",
+  "version": "1.0.0",
+  "description": "Local-first desktop medication tracker",
+  "main": "out/main/index.js",
+  "scripts": {
+    "dev": "set ELECTRON_RUN_AS_NODE=&&electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "package": "npm run build && electron-builder",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@fontsource/lora": "^5.0.8",
+    "@fontsource/nunito-sans": "^5.0.18",
+    "sql.js": "^1.12.0",
+    "lucide-react": "^0.441.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@electron-toolkit/tsconfig": "^1.0.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "electron": "^29.4.6",
+    "electron-builder": "^24.13.3",
+    "electron-vite": "^2.3.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.4",
+    "vitest": "^2.0.5"
+  },
+  "build": {
+    "appId": "com.pillpal.app",
+    "productName": "PillPal",
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**/*",
+      "!out/**/*.map"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
