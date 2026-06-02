@@ -6,13 +6,16 @@ import fs from 'fs'
 // Dynamic require prevents Rollup from bundling sql.js inline.
 // At runtime, Node.js loads it from node_modules properly.
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const initSqlJs: () => Promise<SqlJsStatic> = require('sql.js')
+const initSqlJs: (config?: { locateFile?: (file: string) => string }) => Promise<SqlJsStatic> = require('sql.js')
 
 let _db: Database | null = null
 let _dbPath: string = ''
 
 export async function initDb(): Promise<void> {
-  const SQL = await initSqlJs()
+  const wasmDir = app.isPackaged
+    ? path.join(process.resourcesPath, 'app.asar.unpacked', 'node_modules', 'sql.js', 'dist')
+    : path.join(__dirname, '../../node_modules/sql.js/dist')
+  const SQL = await initSqlJs({ locateFile: (file) => path.join(wasmDir, file) })
   _dbPath = path.join(app.getPath('userData'), 'pillpal.db')
 
   if (fs.existsSync(_dbPath)) {

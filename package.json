@@ -38,7 +38,12 @@
     },
     "files": [
       "out/**/*",
-      "!out/**/*.map"
+      "!out/**/*.map",
+      "node_modules/sql.js/dist/sql-wasm.js",
+      "node_modules/sql.js/dist/sql-wasm.wasm"
+    ],
+    "asarUnpack": [
+      "node_modules/sql.js/dist/sql-wasm.wasm"
     ],
     "win": {
       "target": "nsis"
